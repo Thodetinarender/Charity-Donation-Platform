@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charity Donation Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> <!-- Bootstrap Icons -->
+    <style>
+        /* Custom Hamburger Menu Styling */
+        .menu-icon_component {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .menu-icon_line {
+            background-color: white;
+            height: 3px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        /* Menu Open Animation */
+        .menu-open .menu-icon_line-top {
+            transform: translateY(8px) rotate(-45deg);
+        }
+
+        .menu-open .menu-icon_line-middle {
+            opacity: 0;
+            width: 0;
+        }
+
+        .menu-open .menu-icon_line-bottom {
+            transform: translateY(-8px) rotate(45deg);
+        }
+    </style>
+</head>
+<body class="bg-light text-dark">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Charity Donation Platform</a>
+
+            <!-- Hamburger Menu Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <div class="menu-icon_component">
+                    <div class="menu-icon_line menu-icon_line-top"></div>
+                    <div class="menu-icon_line menu-icon_line-middle"></div>
+                    <div class="menu-icon_line menu-icon_line-bottom"></div>
+                </div>
+            </button>
+
+            <!-- Navbar Links (Including Profile Icon Inside the Menu) -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/html/applied-jobs.html">Applied Jobs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/html/company.html">Company Services</a></li>                  
+                    <li class="nav-item">
+                        <a class="nav-link" href="/html/profile.html">
+                            <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <h2 class="mb-4 text-center">Pending Charity Approvals</h2>
+        <div id="charityList" class="row gy-4"></div>
+      </div>
+      
+
+<div class="modal fade" id="statusModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Update Charity Status</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center">
+          <p>Select new status:</p>
+          <button id="approveBtn" class="btn btn-success me-2">Approve</button>
+          <button id="rejectBtn" class="btn btn-danger">Reject</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+    <!-- Scripts -->
+    <script src="/script/admin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

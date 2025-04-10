@@ -24,8 +24,20 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
 
         const data = await response.json();
         localStorage.setItem('token', data.token); // Store the token in localStorage
+        localStorage.setItem('userId', data.userId); // <-- this stores userId
+        localStorage.setItem('userName', data.userName);
+        localStorage.setItem('isAdmin', data.isAdmin); // <-- Important
+        localStorage.setItem('email', data.email); // only if you return it in res
+
         alert('Login successful!');
-        window.location.href = '/html/dashboard.html'; // Redirect to the dashboard or home page
+
+         // ✅ Redirect based on admin status
+         if (data.isAdmin) {
+            window.location.href = '/html/admin.html'; // Admin dashboard
+        } else {
+            window.location.href = '/html/home.html'; // Normal user dashboard
+        }
+
     } catch (err) {
         warningDiv.classList.remove('d-none');
         warningDiv.innerText = err.message;

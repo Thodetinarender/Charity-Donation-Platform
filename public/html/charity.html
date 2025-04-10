@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charity Donation Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> <!-- Bootstrap Icons -->
+    <style>
+        /* Custom Hamburger Menu Styling */
+        .menu-icon_component {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .menu-icon_line {
+            background-color: white;
+            height: 3px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        /* Menu Open Animation */
+        .menu-open .menu-icon_line-top {
+            transform: translateY(8px) rotate(-45deg);
+        }
+
+        .menu-open .menu-icon_line-middle {
+            opacity: 0;
+            width: 0;
+        }
+
+        .menu-open .menu-icon_line-bottom {
+            transform: translateY(-8px) rotate(45deg);
+        }
+    </style>
+</head>
+<body class="bg-light text-dark">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Charity Donation Platform</a>
+  
+      <!-- Hamburger Menu Button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="menu-icon_component">
+          <div class="menu-icon_line menu-icon_line-top"></div>
+          <div class="menu-icon_line menu-icon_line-middle"></div>
+          <div class="menu-icon_line menu-icon_line-bottom"></div>
+        </div>
+      </button>
+  
+      <!-- Navbar Links -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <!-- Create Charity as a nav-item styled like a button -->
+          <li class="nav-item me-2">
+            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#createCharityModal">
+              <i class="bi bi-plus-circle me-1"></i>Create Charity
+            </button>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/html/applied-jobs.html">Applied Jobs</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="/html/profile.html">
+              <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container mt-5">
+  <h4 class="mb-4 text-primary">Your Registered Charities</h4>
+  <div id="charityList" class="row g-4"></div>
+</div>
+
+  
+
+
+
+
+
+
+
+
+  
+      <!-- Create Charity Modal -->
+      <div class="modal fade" id="createCharityModal" tabindex="-1" aria-labelledby="createCharityModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content shadow-lg">
+            <div class="modal-header bg-primary text-white">
+              <h5 class="modal-title" id="createCharityModalLabel">Register New Charity</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="charityForm">
+                <div class="mb-3">
+                  <label for="charityName" class="form-label">Charity Name</label>
+                  <input type="text" class="form-control" id="charityName" required>
+                </div>
+                <div class="mb-3">
+                  <label for="charityEmail" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="charityEmail" required>
+                </div>
+                <div class="mb-3">
+                  <label for="charityPhone" class="form-label">Phone</label>
+                  <input type="text" class="form-control" id="charityPhone" required>
+                </div>
+                <div class="mb-3">
+                  <label for="charityDescription" class="form-label">Description</label>
+                  <textarea class="form-control" id="charityDescription" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="charityMission" class="form-label">Mission</label>
+                  <textarea class="form-control" id="charityMission" rows="2" required></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="charityGoals" class="form-label">Goals</label>
+                  <textarea class="form-control" id="charityGoals" rows="2" required></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="charityProjects" class="form-label">Projects</label>
+                  <textarea class="form-control" id="charityProjects" rows="2" required></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="charityStreet" class="form-label">Street</label>
+                  <input type="text" class="form-control" id="charityStreet">
+                </div>
+                <div class="mb-3">
+                  <label for="charityApartment" class="form-label">Apartment</label>
+                  <input type="text" class="form-control" id="charityApartment">
+                </div>
+                <div class="mb-3">
+                  <label for="charityZip" class="form-label">ZIP Code</label>
+                  <input type="text" class="form-control" id="charityZip">
+                </div>
+                <div class="mb-3">
+                  <label for="charityCity" class="form-label">City</label>
+                  <input type="text" class="form-control" id="charityCity">
+                </div>
+                <div class="mb-3">
+                  <label for="charityCountry" class="form-label">Country</label>
+                  <input type="text" class="form-control" id="charityCountry">
+                </div>
+                 
+                <div class="text-end">
+                  <button type="submit" class="btn btn-success">Submit for Approval</button>
+                </div>
+              </form>
+              <div id="formMessage" class="mt-3 text-center"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+    <!-- Scripts -->
+    <script src="/script/charity.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
