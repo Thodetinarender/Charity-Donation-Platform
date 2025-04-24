@@ -9,10 +9,10 @@ exports.createDonationSession = async (req, res) => {
     const userId = req.user.userId; // ✅ Match your middleware
     const userEmail = req.user.email; 
 
-    console.log('📝 Creating Donation Session');
-    console.log(`💵 Amount: ${amount}`);
-    console.log(`🏥 Charity ID: ${charityId}`);
-    console.log(`👤 User ID: ${userId}`);
+    console.log(' Creating Donation Session');
+    console.log(` Amount: ${amount}`);
+    console.log(` Charity ID: ${charityId}`);
+    console.log(` User ID: ${userId}`);
 
     // Save donation in DB first
     const donation = await Donation.create({
