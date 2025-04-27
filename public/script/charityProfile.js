@@ -78,17 +78,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // Handle form submission
         document.getElementById('edit-charity-form').addEventListener('submit', (e) => {
           e.preventDefault();
-  
+        
           const updatedCharity = {
+            id: charityId, // Ensure the charity ID is included
             name: document.getElementById('edit-name').value,
             phone: document.getElementById('edit-phone').value,
             description: document.getElementById('edit-description').value,
             mission: document.getElementById('edit-mission').value,
             goals: document.getElementById('edit-goals').value,
             projects: document.getElementById('edit-projects').value,
-            status: 'pending' // Optional: Set to pending on update
           };
-  
+        
           fetch(`/api/charities/profile/update`, {
             method: 'PUT',
             headers: {
