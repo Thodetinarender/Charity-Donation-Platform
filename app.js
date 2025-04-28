@@ -21,19 +21,19 @@ const app = express();
 app.use(bodyParser.json()); // Parse JSON bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'view')));
 
 // Public routes (no authentication required)
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "html", 'signup.html'));
+  res.sendFile(path.join(__dirname, "view", "html", 'signup.html'));
 });
 
 app.get("/signup", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "html", "signup.html"));
+  res.sendFile(path.join(__dirname, "view", "html", "signup.html"));
 });
 
 app.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "html", "login.html"));
+  res.sendFile(path.join(__dirname, "view", "html", "login.html"));
 });
 
 app.use('/api/v1/users', authRoutes);
