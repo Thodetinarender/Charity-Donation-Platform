@@ -1,6 +1,5 @@
 const donationService = require('../services/donationService');
 
-// Create a Stripe donation session
 exports.createDonationSession = async (req, res) => {
   try {
     const { amount, charityId } = req.body;
@@ -15,19 +14,17 @@ exports.createDonationSession = async (req, res) => {
   }
 };
 
-// Confirm a donation
 exports.confirmDonation = async (req, res) => {
   try {
     const { sessionId, donationId } = req.body;
     const donation = await donationService.confirmDonation(sessionId, donationId);
-    res.status(200).json({ message: 'Donation saved and email sent', donation });
+    res.status(200).json(donation);
   } catch (err) {
     console.error('❌ Error in confirmDonation:', err.message);
     res.status(500).json({ error: 'Failed to confirm donation' });
   }
 };
 
-// Get donation history
 exports.getDonationHistory = async (req, res) => {
   try {
     const userId = req.user.userId;
@@ -39,23 +36,30 @@ exports.getDonationHistory = async (req, res) => {
   }
 };
 
-// Download donation receipt
+
 exports.downloadDonationReceipt = async (req, res) => {
   try {
     const userId = req.user.userId;
     const donationId = req.params.donationId;
-    await donationService.generateDonationReceipt(userId, donationId, res);
+    const pdfData = await donationService.generateDonationReceipt(userId, donationId);
+
+    res.setHeader('Content-Disposition', `attachment; filename=donation_receipt_${donationId}.pdf`);
+    res.setHeader('Content-Type', 'application/pdf');
+    res.send(pdfData);
   } catch (err) {
     console.error('❌ Error in downloadDonationReceipt:', err.message);
     res.status(500).json({ error: 'Failed to generate receipt' });
   }
 };
 
-// Download all donation receipts
 exports.downloadAllReceipts = async (req, res) => {
   try {
     const userId = req.user.userId;
-    await donationService.generateAllReceipts(userId, res);
+    const pdfData = await donationService.generateAllReceipts(userId);
+
+    res.setHeader('Content-Disposition', `attachment; filename=all_donations_${userId}.pdf`);
+    res.setHeader('Content-Type', 'application/pdf');
+    res.send(pdfData);
   } catch (err) {
     console.error('❌ Error in downloadAllReceipts:', err.message);
     res.status(500).json({ error: 'Failed to generate receipts' });
