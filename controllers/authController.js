@@ -63,13 +63,14 @@ exports.logIn = async (req, res) => {
             return res.status(401).json({ error: 'Invalid password' });
         }
 
-        const token = jwtServices.generateAccessTokenOnLogin(user.id, user.name); // Generate token
+        const token = jwtServices.generateAccessTokenOnLogin(user.id, user.name, user.isAdmin, user.email);
         res.status(200).json({
             message: 'Login successful',
             token,
             userId: user.id,
             userName: user.name,
-        });
+            isAdmin: user.isAdmin, 
+            email: user.email,        });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Internal server error' });

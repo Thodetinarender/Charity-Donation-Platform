@@ -1,0 +1,117 @@
+<!-- public/html/success.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Donation Success</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .menu-icon_component {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 25px;
+      height: 18px;
+    }
+
+    .menu-icon_line {
+      height: 3px;
+      background-color: white;
+    }
+
+    .menu-open .menu-icon_line-top {
+      transform: rotate(45deg) translateY(6px);
+    }
+
+    .menu-open .menu-icon_line-middle {
+      opacity: 0;
+    }
+
+    .menu-open .menu-icon_line-bottom {
+      transform: rotate(-45deg) translateY(-6px);
+    }
+  </style>
+</head>
+<body class="bg-light text-dark">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Charity Donation Platform</a>
+
+      <!-- Hamburger Menu Button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="menu-icon_component">
+          <div class="menu-icon_line menu-icon_line-top"></div>
+          <div class="menu-icon_line menu-icon_line-middle"></div>
+          <div class="menu-icon_line menu-icon_line-bottom"></div>
+        </div>
+      </button>
+
+      <!-- Navbar Links -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/html/home.html">Home</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <div class="container mt-5">
+    <h2 class="text-center">🎉 Thank you for your donation!</h2>
+    <div id="donationDetails" class="text-center mt-4">Loading donation info...</div>
+  </div>
+
+  <!-- Bootstrap Bundle for Navbar functionality -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      document.querySelector('.navbar-toggler').addEventListener('click', function () {
+        this.querySelector('.menu-icon_component').classList.toggle('menu-open');
+      });
+
+      const params = new URLSearchParams(window.location.search);
+      const sessionId = params.get('session_id');
+      const donationId = params.get('donation_id');
+      const token = localStorage.getItem('token');
+
+      if (!sessionId || !donationId || !token) {
+        document.getElementById('donationDetails').innerHTML = '<p class="text-danger">Missing information for confirming donation.</p>';
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/donations/confirm', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ sessionId, donationId })
+        });
+
+        const data = await res.json();
+        const container = document.getElementById('donationDetails');
+
+        if (data.donation) {
+          container.innerHTML = `
+            <p><strong>Amount:</strong> $${data.donation.amount}</p>
+            <p><strong>Charity ID:</strong> ${data.donation.CharityId}</p>
+            <p><strong>User ID:</strong> ${data.donation.UserId}</p>
+            <p><strong>Stripe Payment ID:</strong> ${data.donation.stripePaymentId}</p>
+            <a class="btn btn-primary mt-3" href="/html/home.html">Return to Home</a>
+          `;
+        } else {
+          container.innerHTML = `<p class="text-danger">Donation confirmation failed.</p>`;
+        }
+      } catch (err) {
+        console.error('Donation confirmation error:', err);
+        document.getElementById('donationDetails').innerHTML = `<p class="text-danger">Error confirming donation.</p>`;
+      }
+    });
+  </script>
+</body>
+</html>

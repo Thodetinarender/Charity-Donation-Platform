@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> <!-- Ensure Bootstrap Icons -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Add Chart.js -->
+  <style>
+    /* Custom Hamburger Menu Styling */
+    .menu-icon_component {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 24px;
+        cursor: pointer;
+    }
+
+    .menu-icon_line {
+        background-color: white;
+        height: 3px;
+        width: 100%;
+        transition: all 0.3s ease;
+    }
+
+    /* Menu Open Animation */
+    .menu-open .menu-icon_line-top {
+        transform: translateY(8px) rotate(-45deg);
+    }
+
+    .menu-open .menu-icon_line-middle {
+        opacity: 0;
+        width: 0;
+    }
+
+    .menu-open .menu-icon_line-bottom {
+        transform: translateY(-8px) rotate(45deg);
+    }
+</style>
+</head>
+<body class="bg-light text-dark">
+  
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="#">Charity Donation Platform</a>
+
+          <!-- Hamburger Menu Button -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <div class="menu-icon_component">
+                  <div class="menu-icon_line menu-icon_line-top"></div>
+                  <div class="menu-icon_line menu-icon_line-middle"></div>
+                  <div class="menu-icon_line menu-icon_line-bottom"></div>
+              </div>
+          </button>
+
+          <!-- Navbar Links (Including Profile Icon Inside the Menu) -->
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item"><a class="nav-link" href="/html/home.html">Home</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+  
+
+  <!-- Add this -->
+  <div id="charity-profile" class="container mt-4"></div>
+  
+
+  <!-- Edit Charity Modal -->
+<div class="modal fade" id="editCharityModal" tabindex="-1" aria-labelledby="editCharityModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <form id="edit-charity-form">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editCharityModalLabel">Edit Charity Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- Input Fields -->
+            <div class="mb-3">
+              <label for="edit-name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="edit-name" required>
+            </div>
+            <div class="mb-3">
+              <label for="edit-email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="edit-email" disabled>
+            </div>
+            <div class="mb-3">
+              <label for="edit-phone" class="form-label">Phone</label>
+              <input type="text" class="form-control" id="edit-phone">
+            </div>
+            <div class="mb-3">
+              <label for="edit-description" class="form-label">Description</label>
+              <textarea class="form-control" id="edit-description" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="edit-mission" class="form-label">Mission</label>
+              <textarea class="form-control" id="edit-mission" rows="2"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="edit-goals" class="form-label">Goals</label>
+              <textarea class="form-control" id="edit-goals" rows="2"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="edit-projects" class="form-label">Projects</label>
+              <textarea class="form-control" id="edit-projects" rows="2"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  
+
+  
+    <div class="text-center mt-4">
+      <a href="/html/charity.html" class="btn btn-primary">Back to applied-jobs</a>
+    </div>
+  </div>
+
+  <script src="/script/charityProfile.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

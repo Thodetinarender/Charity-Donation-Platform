@@ -15,7 +15,8 @@ const authMiddleware = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = { userId: decoded.userId }; // Ensure userId is set correctly
+    req.user = { userId: decoded.userId,isAdmin: decoded.isAdmin || false,
+      userName: decoded.userName,  email: decoded.email }; // Ensure userId is set correctly
     next();
   } catch (err) {
     console.error('JWT verification failed:', err.message);

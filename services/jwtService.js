@@ -7,6 +7,11 @@ exports.generateAccessTokenOnPremium = (id, name, isPremium) => {
     );
 };
 
-exports.generateAccessTokenOnLogin = (id, name) => {
-    return jwt.sign({ userId: id, name: name }, process.env.JWT_SECRET);
-};
+exports.generateAccessTokenOnLogin = (id, name, isAdmin,email) => {
+    return jwt.sign(
+      { userId: id, userName: name, isAdmin: isAdmin, email: email }, 
+      process.env.JWT_SECRET,
+      { expiresIn: '1h' }
+    );
+  };
+  
