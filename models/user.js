@@ -19,7 +19,7 @@ const User = sequelize.define('User', {
   },
   isAdmin: {
     type: DataTypes.BOOLEAN,
-    defaultValue: true,
+    defaultValue: false,
   },
   street: {
     type: DataTypes.STRING,
