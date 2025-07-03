@@ -54,8 +54,8 @@ process.on('unhandledRejection', (reason, promise) => {
     console.error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
 
-
-sequelize.sync({ force: false }).then(() => { // Avoid using alter: true true
+console.log('Starting app, waiting for DB connection...');
+sequelize.sync({ force: false }).then(() => {
   app.listen(process.env.PORT || 3000, () => {
     console.log(`Server running on port ${process.env.PORT || 3000}`);
   });
