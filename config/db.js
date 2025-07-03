@@ -6,7 +6,7 @@ const Sequelize = require('sequelize');
 //     process.env.DB_USER,     // Use DB_USER from .env
 //     process.env.DB_PASSWORD, // Use DB_PASSWORD from .env
 //     {
-//         dialect: '',
+//         dialect: 'mysql',
 //         host: process.env.DB_HOST,  // Use DB_HOST from .env (RDS Endpoint)
 //         port: process.env.DB_PORT,  // Use DB_PORT from .env (3306 for AWS RDS)
 //         logging: false
