@@ -54,9 +54,15 @@ process.on('unhandledRejection', (reason, promise) => {
     console.error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
 
+
 console.log('Starting app, waiting for DB connection...');
-sequelize.sync({ force: false }).then(() => {
-  app.listen(process.env.PORT || 3000, () => {
-    console.log(`Server running on port ${process.env.PORT || 3000}`);
+sequelize.sync({ force: false })
+  .then(() => {
+    app.listen(process.env.PORT || 3000, () => {
+      console.log(`Server running on port ${process.env.PORT || 3000}`);
+    });
+  })
+  .catch((err) => {
+    console.error('❌ Failed to connect to the database:', err);
+    process.exit(1);
   });
-});
